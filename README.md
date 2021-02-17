@@ -1,4 +1,4 @@
-# vue-formulate
+# playground-contacts
 
 ## Project setup
 ```
