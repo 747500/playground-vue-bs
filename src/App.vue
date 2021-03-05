@@ -1,108 +1,64 @@
-<template>
-  <div id="app">
-    <!--
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    -->
+<template lang="pug">
+	div(id="app")
 
-    <div class="container">
-      <div class="form">
-        <FormulateForm
-          v-model="model"
-          :schema="schema"
-          @submit="submitHandler"
-          />
-      </div>
-      <div class="model">
-        <pre>{{ model }}</pre>
-      </div>
-    </div>
+		div(class="btn-toolbar mb-3" role="toolbar")
+			div(class="btn-group me-2" role="group")
+				bsButton(class="btn-primary btn-sm") qqq
 
-  </div>
+			| &nbsp;
+
+			div(class="btn-group me-2" role="group")
+				bsDropdown(:schema="schema")/
+
 </template>
 
 <script>
 
-//import HelloWorld from './components/HelloWorld.vue'
-
-const schema = [
-  {
-    type: "text",
-    name: "name",
-    label: "Имя"
-  },
-  {
-    name: 'contacts',
-    type: 'group',
-    repeatable: true,
-    label: 'Контакты',
-    addLabel: '+',
-    removeLabel: '-',
-    children: [
-      {
-        type: 'text',
-        name: 'text'
-      },
-    ]
-  },
-  {
-    component: 'div',
-    class: 'hr',
-  },
-  {
-    type: 'radio',
-    name: 'condition',
-    options: { one: "Раз", two: "Два" }
-  }
-]
+import bsDropdown from './components/bs/Dropdown.vue'
+import bsButton from './components/bs/Button.vue'
 
 export default {
-  name: 'App',
-  components: {
-    //VueFormulate,
-    //HelloWorld
-  },
-  data () {
-    return {
-      model: {}
-    }
-  },
-  created () {
-    //this.schema.push()
-  },
-  computed: {
-    schema () {
-      //sconsole.log()
+	name: 'App',
+	components: {
+		bsDropdown,
+		bsButton,
+	},
+	data () {
+		return {
+			schema: {
+				text: 'Blah',
+				class: [
+					'btn-sm',
+					//'btn-danger',
+					'btn-outline-danger',
+				],
+				menu: [
+					{
+						text: 'Cancel',
+						handler: this.onCancel
+					},
+					{
+						text: 'Ok',
+						handler: this.onConfirm
+					}
+			]
+			}
+		}
+	},
+	created () {
+		//this.schema.push()
+	},
+	computed: {
+	},
+	methods: {
+		onCancel(...args) {
+			console.log('onCancel', args)
+		},
 
-      return [
-        ...schema,
-        ...[
-          {
-            component: 'div',
-            children: [
-              {
-                label: this.model.condition,
-                type: 'hidden'
-              }
-            ]
-          },
-          {
-            component: 'div',
-            class: 'hr'
-          },
-          {
-            type: "submit",
-            label: "Готово"
-          }
-        ]
-      ]
-    }
-  },
-  methods: {
-    submitHandler (formData) {
-      console.log('<App.vue>', formData)
-    }
-  }
+		onConfirm(...args) {
+			console.log('onConfirm', args)
+		},
+	}
 }
 </script>
 
@@ -113,64 +69,15 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  margin-top: 60px;
+  margin: 3rem;
+  padding: 3rem;
+  outline: 1px solid #ddd;
 }
 
 div.hr {
   width: 100%;
   height: 1px;
   border-top: 1px solid #ccc;
-}
-
-.container {
-  display: flex;
-}
-
-.container .form {
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex: 10;
-}
-
-.container .model {
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex: 10;
-}
-
-.formulate-input {
-  margin: 0em;
-  padding: 0.5em;
-  /*
-  outline: 1px dotted #ccc;
-  */
-}
-
-.formulate-input[data-classification=group] [data-is-repeatable]
-.formulate-input-group-repeatable {
-  position: relative;
-}
-
-.formulate-input[data-classification=group] [data-is-repeatable]
-.formulate-input-group-repeatable-remove {
-  position: absolute;
-  top: calc(50% - 0.63em);
-  right: 1em;
-  display: block;
-  cursor: pointer;
-  border: 1px solid gray;
-  /*border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));*/
-  background-color: rgb(239, 239, 239);/*, rgb(59, 59, 59));*/
-  border-radius: 3px;
-  /*width: 1.5em;*/
-  padding: 1px 6px;
-  text-align: center;
-  box-sizing: border-box;
-}
-
-.formulate-input[data-classification=group] [data-is-repeatable]
-.formulate-input-group-repeatable-remove:hover {
-  background-color: rgb(229, 229, 229);
 }
 
 </style>
