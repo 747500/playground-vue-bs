@@ -1,4 +1,4 @@
-# playground-contacts
+# playground-vue-bs
 
 ## Project setup
 ```
